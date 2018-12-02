@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <title>Excel转XML工具</title> -->
+  <title>Xpath与CSS转换工具
+  </title>
+  <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <link href="css2xpath/css2xpath.css" rel="stylesheet" type="text/css" />
+  <link href="css2xpath/buttons.css" rel="stylesheet" type="text/css" />
+  
+</head>
+
+<body >
+  <!-- <h1>Excel转XML工具</h1>
+  <div width="300" hight="300">
+    <p id="test">欢迎使用</p>
+    等待转换的Excel表：<input type="file" accept="xls" id="url" width="500" hight="300"></input><br><br>
+    <button id="btn1" width="500" onclick="test">开始转换</button><br><br>
+    导出位置：<input id="input2" width="300" hight="300" value="C:\"></input><br><br>
+  </div> -->
+<div>
+  
+  <div id="xpath2css" >
+      <div>
+          <h1>
+           <span>Xpath</span>2<span>CSS</span>
+          </h1>
+          <code>神州优车厦门应用一组测试技术组制作</code>
+          <textarea id="input1" type="text" placeholder="请输入Xpath内容"></textarea>
+          <button id="btn1" class="button button-pill button-raised button-primary" ><b>开始转换</b></button><br>
+          <textarea id="input2" type="text" placeholder="转成CSS Selector"></textarea><br><br><br><br><br><br>
+      </div>
+  </div>
+  
+  <div id="css2xpath">
+      <div>
+          <h1>
+              <span>CSS</span>2<span>XPath</span>
+          </h1>
+          <!-- <a class="right" href="http://wiki.10101111.com/pages/viewpage.action?pageId=180840581">
+              View it on Wiki</a> -->
+          <code>神州优车厦门应用一组测试技术组制作</code>
+      </div>
+      <div id="demo">
+          <label class="css-label" for="input">CSS</label>
+          <textarea id="input" type="text" placeholder="请输入CSS Selector内容" autofocus></textarea>
+          <code id="result"></code>
+      </div>
+    </div>
+
+  </div>
+<div>
+
+  <p></p>
+  <p>例子</p>
+  <p>Xpath：</p>//*[@id="node-109"]/div[1]/div/div/table[1]/tbody/tr[1]/td[4]</p>
+  <p>CSS：#node-109 > div:first-of-type > div > div > table:first-of-type > tbody > tr:first-of-type > td:nth-of-type(4)</p>
+</div>
+   
+   <script>
+        //当输入框元素获取到焦点修改背景颜色
+        $("textarea").focus(function(){
+           $(this).css("background-color","#cccccc");  
+        });  
+        //当输入框元素失去焦点修改北京颜色
+        $("textarea").blur(function(){
+           $(this).css("background-color","#ffffff");  
+        });   
+
+    </script>
+  <!-- All of the Node.js APIs are available in this renderer process. -->
+ 
+
+   <script>
+  $("#btn1").click(function(){                                                                                   
+    var xPathToCss=require("xpath-to-css");
+    const xPath = $("#input1").val();
+    const css = xPathToCss(xPath);
+    //alert(css); // => 'div#foo:nth-of-type(2) > span.bar a[class*=baz] img:first-of-type'
+    $("#input2").val(css);
+  })
+   </script>
+
+
+<script>
+    var css2xpath=require("./css2xpath/index.js");
+    var input = document.getElementById('input'),
+        result = document.getElementById('result'),
+        timeout;
+
+    input.addEventListener('keyup', function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            var xpath = css2xpath(balanceParens(input.value));
+
+            result.innerHTML = xpath;
+        }, 200);
+    });
+
+    function setInput(css) {
+        input.value = css;
+
+        var xpath = css2xpath(balanceParens(input.value));
+
+        result.innerHTML = xpath;
+    }
+
+    function balanceParens(str) {
+        var count = 0;
+
+        str.replace(/[\(\)]/g, function (m) {
+            if (m === '(') {
+                count++;
+            } else {
+                count--;
+            }
+        });
+
+        if (count > 0) {
+            while (count-- > 0) {
+                console.log("YES");
+                str += ')';
+            }
+        } else {
+            while (count++ < 0) {
+                str = '(' + str;
+            }
+        }
+
+        return str;
+    }
+</script>
+</body>
+
+</html>

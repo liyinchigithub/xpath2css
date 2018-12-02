@@ -1,0 +1,27 @@
+{
+  "name": "xpath2jquery",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . xpath2jquery --all --out ./打包 --app-version=1.0.0 --electron-version=3.0.7"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "liyinchi",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^3.0.7"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "xpath-to-css": "^1.0.3"
+  }
+}
